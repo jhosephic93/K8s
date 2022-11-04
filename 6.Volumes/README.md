@@ -480,3 +480,111 @@ $ kubectl exec -ti nginx-pod-secret -- env
 ```console
 $ kubectl delete all --all
 ```
+
+**************************************
+
+## K8s | Volume NFS:
+
+### Pre-requisitos
+
+  - Tener un Server NFS.
+    - IP de Server NFS y directorio.
+
+1. Crear archivo pod-nfs.yaml
+
+```console
+$ nano pod-nfs.yaml
+```
+
+```yaml
+# Create a pod that reads and writes to the
+# NFS server via an NFS volume.
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-using-nfs
+spec:
+  # Add the server as an NFS volume for the pod
+  volumes:
+    - name: nfs-volume
+      nfs: 
+        # URL for the NFS server
+        server: 192.168.1.50 # Change this!
+        path: /mnt/nfs-share/
+
+  # In this container, we'll mount the NFS volume
+  # and write the date to a file inside it.
+  containers:
+    - name: app
+      image: alpine
+
+      # Mount the NFS volume in the container
+      volumeMounts:
+        - name: nfs-volume
+          mountPath: /var/nfs
+
+      # Write to a file inside our NFS
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do date >> /var/nfs/dates.txt; sleep 5; done"]   
+```
+
+### PLUS | Crear un Server NFS con K8s
+
+1. Crear archivo nfs-server.yaml
+
+```console
+$ nano nfs-server.yaml
+```
+
+```yaml
+# Note - an NFS server isn't really a Kubernetes
+# concept. We're just creating it in Kubernetes
+# for illustration and convenience. In practice,
+# it might be run in some other system.
+
+# Create a service to expose the NFS server
+# to pods inside the cluster.
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: nfs-service
+spec:
+  selector:
+    role: nfs
+  ports:
+    # Open the ports required by the NFS server
+    # Port 2049 for TCP
+    - name: tcp-2049
+      port: 2049
+      protocol: TCP
+
+    # Port 111 for UDP
+    - name: udp-111
+      port: 111
+      protocol: UDP
+
+---
+
+# Run the NFS server image in a pod that is
+# exposed by the service.
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nfs-server-pod
+  labels:
+    role: nfs
+spec:
+  containers:
+    - name: nfs-server-container
+      image: cpuguy83/nfs-server
+      securityContext:
+        privileged: true
+      args:
+        # Pass the paths to share to the Docker image
+        - /exports
+```
+
+Mas Info -> https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-volumes-example-nfs-persistent-volume.html
