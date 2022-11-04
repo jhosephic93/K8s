@@ -2,6 +2,9 @@
 
 ## Limitar CPU
 
+- Dato: Se recomienda usar solo **request** en los Pods, y no tener **Limits** 
+- Mas Info -> https://home.robusta.dev/blog/stop-using-cpu-limits
+
 1. Crear archivo pod-cpu.yaml con contenido:
 
 ```console
