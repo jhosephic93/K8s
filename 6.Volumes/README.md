@@ -207,6 +207,15 @@ $ kubectl exec -ti alpine-empty sh
 
 ## ConfigMaps:
 
+### Configmaps | Command Basics
+
+```console
+$ kubectl edit configmap aws-auth -n kube-system
+$ kubectl get configmap -n kube-system
+$ kubectl get configmap aws-auth -n kube-system
+$ kubectl describe configmap aws-auth -n kube-system
+```
+
 1. Crear archivo configmap1.yaml con contenido:
 
 ```console
