@@ -1,113 +1,114 @@
-# Desplegar POD de prueba.
+# DEPLOY TEST POD
 
-# EXAMPLE01
+## EXAMPLE 01
 
-1. Crear archivo.
+1. Create file.
 
-```console
-$ nano pod1.yaml
-```
+   ```console
+   nano pod1.yaml
+   ```
 
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: myapp-pod
-  labels:
-    app: myapp
-spec:
-  containers:
-  - name: myapp-container
-    image: alpine
-    command: ['sh', '-c', 'echo Hello Aulautil! && sleep 3600']
-```
+   ```yaml
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: myapp-pod
+     labels:
+       app: myapp
+   spec:
+     containers:
+     - name: myapp-container
+       image: alpine
+       command: ['sh', '-c', 'echo Hello Aulautil! && sleep 3600']
+   ```
 
-2. Ejecutar
+2. Execute
 
-```console
-$ kubectl apply -f pod1.yaml
-$ kubectl get pods #Listar los pods
-$ kubectl logs myapp-pod #Revisar logs del pod:
-$ kubectl describe pods myapp-pod #Describir Pods
-```
+    ```console
+    kubectl apply -f pod1.yaml
+    kubectl get pods #Listar los pods
+    kubectl logs myapp-pod #Revisar logs del pod:
+    kubectl describe pods myapp-pod #Describir Pods
+    ```
 
-3. Ejecutar un sh dentro del pod
+3. Execute a shell inside the pod.
 
-```console
-$ kubectl exec -ti myapp-pod -- sh
-# id
-# ps aux
-# env
-```
+    ```console
+    $ kubectl exec -ti myapp-pod -- sh
+    # id
+    # ps aux
+    # env
+    ```
 
-4. Analizar la salida del comando env respecto a las variables de K8s. (hostname)
-Instalar htop y curl, luego ejecutar htop y revisar procesos.
+4. Analyze the output of the env command in relation to the Kubernetes variables. (hostname)
+Install htop and curl, then run htop and check processes.
 
-```console
-# apk add htop curl
-# htop
-# exit
-```
+    ```console
+    # apk add htop curl
+    # htop
+    # exit
+    ```
 
-4. Recuperar la informacion del pod en formato yaml:
+5. Retrieve the pod information in yaml format.
 
-```console
-$ kubectl get pod myapp-pod -o yaml
-```
+    ```console
+    kubectl get pod myapp-pod -o yaml
+    ```
 
-# EXAMPLE02
+## EXAMPLE02
 
-1. Crear archivo.
+1. Create file.
 
-```console
-$ pod-nginx.yaml
-```
+    ```console
+    pod-nginx.yaml
+    ```
 
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: mynginx
-  labels:
-    app: mynginx
-spec:
-  containers:
-  - name: mynginx-container
-    image: nginx:alpine
-```
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mynginx
+      labels:
+        app: mynginx
+    spec:
+      containers:
+      - name: mynginx-container
+        image: nginx:alpine
+    ```
 
-2. Ejecutar
+2. Execute
 
-```console
-$ kubectl apply -f pod-nginx.yaml
-$ kubectl get pod
-$ kubectl logs -f mynginx
-$ kubectl describe pod mynginx
-```
+    ```console
+    kubectl apply -f pod-nginx.yaml
+    kubectl get pod
+    kubectl logs -f mynginx
+    kubectl describe pod mynginx
+    ```
 
-3. Obtener la IP del Pod y hacer curl dentro del minikube:
+3. Get the IP of the Pod and perform a curl inside the minikube.
 
-```console
-$ kubectl describe pod mynginx | grep IP
-$ minikube ssh
-$ curl -I <ip-privada-pod>
-$ exit
-```
+    ```console
+    kubectl describe pod mynginx | grep IP
+    minikube ssh
+    curl -I <ip-privada-pod>
+    exit
+    ```
 
-4. Revisando el interior del pod nginx:
+4. Checking inside the nginx pod:
 
-```console
-$ kubectl exec -ti mynginx -- sh
-# ps aux
-# env
-# curl -I localhost
-```
+    ```console
+    $ kubectl exec -ti mynginx -- sh
+    # ps aux
+    # env
+    # curl -I localhost
+    ```
 
-5. Eliminar proceso principal y revisar el listado de pods columna restart:
+5. Delete the main process and check the pod listing in the restart column.
 
-```console
-$ kubectl exec -ti mynginx -- sh
-# kill 1
-$ watch kubectl get pods
-```
-- Ejercicio: eliminar el proceso principal hasta que el status te marque “CrashLoopBackOff”
+    ```console
+    $ kubectl exec -ti mynginx -- sh
+    # kill 1
+    $ watch kubectl get pods
+    ```
+
+- Exercise: terminate the main process until the status shows 'CrashLoopBackOff'.
