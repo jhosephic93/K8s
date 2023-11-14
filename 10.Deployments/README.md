@@ -2,6 +2,8 @@
 
 ![alt text](https://matthewpalmer.net/kubernetes-app-developer/articles/deployment-diagram-kubernetes.gif)
 
+![alt text](../img/Deployments-Rolling-Update.webp)
+
 - Does what ReplicaSet does + Manages updates.
 - Describes a desired state.
 - Manage updates (Rolling Back)
