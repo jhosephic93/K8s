@@ -1,270 +1,274 @@
-# Limitar Uso de CPU & Mem
+# Limit CPU and Mem Usage
 
-## Limitar CPU
+## Limit CPU
 
-- Dato: Se recomienda usar solo **request** en los Pods, y no tener **Limits** 
-- Mas Info -> https://home.robusta.dev/blog/stop-using-cpu-limits
+- Tip: It is recommended to only use **request** in Pods, and not have **Limits**
+- More Info -> [Stop-Using-CPU-Limits](https://home.robusta.dev/blog/stop-using-cpu-limits)
 
-1. Crear archivo pod-cpu.yaml con contenido:
+1. Create pod-cpu.yaml file with content:
 
-```console
-$ nano pod-cpu.yaml
-```
+    ```console
+    nano pod-cpu.yaml
+    ```
 
-```yaml
-kind: Pod
-apiVersion: v1
-metadata:
- name: pod-cpu-demo
-spec:
- containers:
- - name: pod-cpu-demo-ctr
-   #image: vish/stress
-   image: michaeltinga/ubuntu22.04-stress:v1
-   args:
-     - --cpu
-     - "2"
-   resources:
-     requests:
-       cpu: "0.5"
-     limits:
-       cpu: "1"
-```
+    ```yaml
+    kind: Pod
+    apiVersion: v1
+    metadata:
+     name: pod-cpu-demo
+    spec:
+     containers:
+     - name: pod-cpu-demo-ctr
+       #image: vish/stress
+       image: michaeltinga/ubuntu22.04-stress:v1
+       args:
+         - --cpu
+         - "2"
+       resources:
+         requests:
+           cpu: "0.5"
+         limits:
+           cpu: "1"
+    ```
 
-2. Crear pod con comando:
+2. Execute:
 
-```console
-$ kubectl apply -f pod-cpu.yaml
-$ kubectl get pods
-$ kubectl describe pods/pod-cpu-demo #Inspeccionar
-```
+    ```console
+    kubectl apply -f pod-cpu.yaml
+    kubectl get pods
+    kubectl describe pods/pod-cpu-demo #Inspeccionar
+    ```
 
-3. Revisar consumo, primero verificar que el addon de metric server este habilitado:
+3. Check consumption, first verify that the metric server addon is enabled:
 
-```console
-$ minikube addons list|grep metric
-$ minikube addons enable metrics-server
-$ kubectl top pods pod-cpu-demo
-```
+    ```console
+    minikube addons list|grep metric
+    minikube addons enable metrics-server
+    kubectl top pods pod-cpu-demo
+    ```
 
 4. Logs:
 
-```console
-$ kubectl logs -f pods/pod-cpu-demo
-$ sudo htop  #Revisar consumo de cpu:
-```
+    ```console
+    kubectl logs -f pods/pod-cpu-demo
+    sudo htop  #Revisar consumo de cpu:
+    ```
 
-## Seteando CPU 5.
+## Setting CPU 5
 
-- Crear pod_cpu2.yaml con contenido:
+1. Create pod_cpu2.yaml file with content:
 
-```yaml
-kind: Pod
-apiVersion: v1
-metadata:
- name: pod-cpu-demo-max
-spec:
- containers:
- - name: pod-cpu-demo-ctr
-   #image: vish/stress
-   image: michaeltinga/ubuntu22.04-stress:v1
-   args:
-     - -cpus
-     - "5"
-   resources:
-     limits:
-       cpu: "5"
-```
+    ```yaml
+    kind: Pod
+    apiVersion: v1
+    metadata:
+     name: pod-cpu-demo-max
+    spec:
+     containers:
+     - name: pod-cpu-demo-ctr
+       #image: vish/stress
+       image: michaeltinga/ubuntu22.04-stress:v1
+       args:
+         - -cpus
+         - "5"
+       resources:
+         limits:
+           cpu: "5"
+    ```
 
-6. Aplicar:
+2. Apply:
 
-```console
-$ kubectl apply -f pod_cpu2.yaml
-$ kubectl get pods
-```
+    ```console
+    kubectl apply -f pod_cpu2.yaml
+    kubectl get pods
+    ```
 
-7. Inspeccionar -  Veremos que pasa a pending | describe veremos que dice no hay disponibles.
+3. Inspect - We will see what happens to pending | We'll see what it says are not available.
 
-```console
-$ kubectl describe pods pod-cpu-demo-max
-```
+    ```console
+    kubectl describe pods pod-cpu-demo-max
+    ```
 
-8. Revisar consumo en nodo em Limits dice 1(25%) por el pod-cpu-demo
+4. Check consumption in the Limits node says 1(25%) for the pod-cpu-demo
 
-```console
-$ kubectl describe node
-```
+    ```console
+    kubectl describe node
+    ```
 
-9. Editar pod_cpu2.yaml para dejar solo con 2 unidades de cpu como sigue:
-```yaml
-       cpu: "2"
-```
+5. Edit pod_cpu2.yaml to leave only 2 cpu units as follows:
 
-```console
-$ kubectl delete -f pod_cpu2.yaml
-$ kubectl apply -f pod_cpu2.yaml
-$ kubectl top nodes #Verificar consumo en nodo:
-$ kubectl describe nodes
-```
+    ```yaml
+    cpu: "2"
+    ```
 
-10. Verificar que el **REQUEST DE CPU ES EL MISMO Que EL LIMIT**, porque no se definio:
+    ```console
+    kubectl delete -f pod_cpu2.yaml
+    kubectl apply -f pod_cpu2.yaml
+    kubectl top nodes #Verificar consumo en nodo:
+    kubectl describe nodes
+    ```
 
-```console
-$ kubectl describe pods pod-cpu-demo-max
-```
+6. Verify that the **CPU REQUEST IS THE SAME AS THE LIMIT**, because it was not defined:
 
-## Exceder el uso de Cpu:
+    ```console
+    kubectl describe pods pod-cpu-demo-max
+    ```
 
-```console
-$ kubectl delete pods --all
-$ kubectl describe nodes
-```
+## Exceed CPU usage
 
-- Crear archivo con pod_cpu3.yaml contenido:
+1. Delete Pods
 
-```console
-$ nano pod_cpu3.yaml
-```
+    ```console
+    kubectl delete pods --all
+    kubectl describe nodes
+    ```
 
-```yaml
-kind: Pod
-apiVersion: v1
-metadata:
- name: pod-cpu-max
-spec:
-  containers:
-  - name: pod-cpu-max
-    image: ubuntu:18.04
-    command: ["/bin/sh"]
-    args: ["-c", "while true; do date; sleep 5; done"]
-    resources:
-      limits:
-        cpu: "2"
-```
+2. Create file with pod_cpu3.yaml content:
 
-```console
-$ kubectl apply -f pod_cpu3.yaml
-```
+    ```console
+    nano pod_cpu3.yaml
+    ```
 
-1. Verificar los recursos usados en cpu del nodo:
+    ```yaml
+    kind: Pod
+    apiVersion: v1
+    metadata:
+     name: pod-cpu-max
+    spec:
+      containers:
+      - name: pod-cpu-max
+        image: ubuntu:18.04
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do date; sleep 5; done"]
+        resources:
+          limits:
+            cpu: "2"
+    ```
 
-```console
-$ kubectl describe nodes
-```
+    ```console
+    kubectl apply -f pod_cpu3.yaml
+    ```
 
-2. Debe salir mas o menos asi:
+3. Check the resources used in the node's CPU:
 
-| Resource  | Requests    | Limits  |
-| :-------- |:-----------:| -------:|
-| cpu       | 2750m (68%) | 2 (50%) |
+    ```console
+    kubectl describe nodes
+    ```
 
-3. Instalar stress e intentar usar las cpus asignadas:
+4. It should come out more or less like this:
 
-```console
-$ kubectl exec -ti pod-cpu-max -- bash
-# apt update
-# apt install -y stress
-# stress --cpu 2
-```
+    | Resource  | Requests    | Limits  |
+    | :-------- |:-----------:| -------:|
+    | cpu       | 2750m (68%) | 2 (50%) |
 
-4. Luego cambiar a --cpu 4 
+5. Install stress and try to use the assigned cpus:
 
-```console
-# stress --cpu 4
-```
+    ```console
+    $ kubectl exec -ti pod-cpu-max -- bash
+    # apt update
+    # apt install -y stress
+    # stress --cpu 2
+    ```
 
-5. En otro terminal verificar uso de cpu:
+6. Then change to --cpu 4
 
-```console
-$ sudo htop
-$ kubectl top pods
-```
-## RESOURCE MEMORY | Limitar MEM
+    ```console
+    stress --cpu 4
+    ```
 
-1. Crear archivo pod_mem.yaml con contenido:
+7. In another terminal check CPU usage:
 
-```console
-$ nano pod_mem.yaml
-```
+    ```console
+    sudo htop
+    kubectl top pods
+    ```
 
-```yaml
-kind: Pod
-apiVersion: v1
-metadata:
- name: pod-memory-demo
-spec:
- containers:
- - name: memory-demo-ctr
-   #image: polinux/stress
-   image: michaeltinga/ubuntu22.04-stress:v1
-   resources:
-     limits:
-       memory: "200Mi"
-     requests:
-       memory: "100Mi"
-   command: ["stress"]
-   args: ["--vm", "1", "--vm-bytes", "150M", "--vm-hang", "1"]
-```
+## RESOURCE MEMORY | Limit MEM
 
-2. Ejecutar
+1. Create pod_mem.yaml file with content:
 
-```console
-$ kubectl apply -f pod_mem.yaml
-$ kubectl get pods
-$ kubectl describe pods pod-memory-demo
-```
+    ```console
+    nano pod_mem.yaml
+    ```
 
-3. Verificar uso de memoria:
+    ```yaml
+    kind: Pod
+    apiVersion: v1
+    metadata:
+     name: pod-memory-demo
+    spec:
+     containers:
+     - name: memory-demo-ctr
+       #image: polinux/stress
+       image: michaeltinga/ubuntu22.04-stress:v1
+       resources:
+         limits:
+           memory: "200Mi"
+         requests:
+           memory: "100Mi"
+       command: ["stress"]
+       args: ["--vm", "1", "--vm-bytes", "150M", "--vm-hang", "1"]
+    ```
 
-```console
-$ kubectl top pods
-$ kubectl top nodes
-$ kubectl describe nodes
-```
+2. Execute
 
-4. Inspeccionar:
+    ```console
+    kubectl apply -f pod_mem.yaml
+    kubectl get pods
+    kubectl describe pods pod-memory-demo
+    ```
 
-```console
-$ kubectl exec -ti pod-memory-demo -- sh
-# free -m
-# ps aux
-# exit
-```
+3. Check memory usage:
 
-## Exceder Memory:
+    ```console
+    kubectl top pods
+    kubectl top nodes
+    kubectl describe nodes
+    ```
 
-1. Crear archivo pod_mem2.yaml con:
+4. Inspect:
 
-```console
-$ nano pod_mem2.yaml
-```
+    ```console
+    kubectl exec -ti pod-memory-demo -- sh
+    free -m
+    ps aux
+    exit
+    ```
 
-```yaml
-kind: Pod
-apiVersion: v1
-metadata:
- name: pod-memory-demo-max
-spec:
- containers:
- - name: memory-demo-ctr
-   #image: polinux/stress
-   image: michaeltinga/ubuntu22.04-stress:v1
-   resources:
-     limits:
-       memory: "200Mi"
-   command: ["stress"]
-   args: ["--vm", "1", "--vm-bytes", "350M", "--vm-hang", "1"]
-```
+## Exceed Memory
 
-2. Crear aplicando:
+1. Create file pod_mem2.yaml with:
 
-```console
-$ kubectl apply -f pod_mem2.yaml
-$ kubectl describe pods pod-memory-demo-max
-```
+    ```console
+    nano pod_mem2.yaml
+    ```
 
-3. Revisar consumo y comportamiento:
+    ```yaml
+    kind: Pod
+    apiVersion: v1
+    metadata:
+     name: pod-memory-demo-max
+    spec:
+     containers:
+     - name: memory-demo-ctr
+       #image: polinux/stress
+       image: michaeltinga/ubuntu22.04-stress:v1
+       resources:
+         limits:
+           memory: "200Mi"
+       command: ["stress"]
+       args: ["--vm", "1", "--vm-bytes", "350M", "--vm-hang", "1"]
+    ```
 
-```console
-$ watch kubectl top pods
-```
+2. Apply:
+
+    ```console
+    kubectl apply -f pod_mem2.yaml
+    kubectl describe pods pod-memory-demo-max
+    ```
+
+3. Review consumption and behavior:
+
+    ```console
+    watch kubectl top pods
+    ```
