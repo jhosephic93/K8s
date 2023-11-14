@@ -12,22 +12,23 @@
     ```
 
     ```yaml
-    kind: Pod
+
     apiVersion: v1
+    kind: Pod
     metadata:
-     name: pod-cpu-demo
+      name: pod-cpu-demo
     spec:
-     containers:
-     - name: pod-cpu-demo-ctr
-       image: vish/stress
-       args:
-         - --cpu
-         - "2"
-       resources:
-         requests:
-           cpu: "0.5"
-         limits:
-           cpu: "1"
+      containers:
+      - name: pod-cpu-demo-ctr
+        image: vish/stress
+        args:
+        - --cpus
+        - "2"
+        resources:
+          requests:
+            cpu: "0.5"
+          limits:
+            cpu: "1"
     ```
 
 2. Execute:
