@@ -1,5 +1,13 @@
 # ANNOTATIONS
 
+- Key-value metadata
+- Additional info on resources
+- Don't impact resource behavior
+- Useful for tools, libraries
+- Store descriptions, usage, debugging
+- Non-essential but informative data
+- Flexible, modifiable anytime
+
 1. Create file pods_annotations.yaml
 
     ```console
@@ -14,7 +22,7 @@
      annotations:
        commit: 44e3275e0
        logs: 'http://logservice.com/nginx'
-       contact: 'Mario Inga <mario21ic@gmail.com>'
+       contact: 'Michaelt Inga <jhosephic93@gmail.com>'
     spec:
      containers:
      - name: nginx
