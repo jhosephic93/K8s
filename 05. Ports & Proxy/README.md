@@ -1,4 +1,4 @@
-# KUBERNETES | FORWARD DE PUERTOS
+# KUBERNETES | PORT FORWARD
 
 1. Create file pod-nginx.yaml with content:
 
