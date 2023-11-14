@@ -113,7 +113,7 @@
     kubectl describe pod nginx-labels|grep IP
     ```
 
-### Prestemos atencion a los valores de Labels, Selector y Endpoints | Verificar que el endpoint sea la misma ip que el pod nginx-labels
+### Let's pay attention to the values of Labels, Selector, and Endpoints | Verify that the endpoint is the same IP as the nginx-labels pod
 
 ## Automatically update the Endpoint of the service
 
