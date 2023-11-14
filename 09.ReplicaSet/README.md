@@ -26,7 +26,7 @@
      template:
        metadata:
          labels:
-           app: myapp
+           app: nginx
        spec:
          containers:
          - name: myapp-container
