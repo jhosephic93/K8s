@@ -29,7 +29,7 @@
        spec:
          containers:
          - name: nginx
-           image: nginx:alpinev1
+           image: nginx:alpine
     ```
 
 2. Execute
