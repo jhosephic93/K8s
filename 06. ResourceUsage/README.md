@@ -58,6 +58,10 @@
 
 1. Create pod_cpu2.yaml file with content:
 
+    ```console
+    nano pod_cpu2.yaml
+    ```
+
     ```yaml
     kind: Pod
     apiVersion: v1
@@ -164,10 +168,10 @@
 5. Install stress and try to use the assigned cpus:
 
     ```console
-    $ kubectl exec -ti pod-cpu-max -- bash
-    # apt update
-    # apt install -y stress
-    # stress --cpu 2
+    kubectl exec -ti pod-cpu-max -- bash
+    apt update
+    apt install -y stress
+    stress --cpu 2
     ```
 
 6. Then change to --cpu 4
@@ -199,8 +203,7 @@
     spec:
      containers:
      - name: memory-demo-ctr
-       #image: polinux/stress
-       image: michaeltinga/ubuntu22.04-stress:v1
+       image: polinux/stress
        resources:
          limits:
            memory: "200Mi"
@@ -251,8 +254,7 @@
     spec:
      containers:
      - name: memory-demo-ctr
-       #image: polinux/stress
-       image: michaeltinga/ubuntu22.04-stress:v1
+       image: polinux/stress
        resources:
          limits:
            memory: "200Mi"
