@@ -1,5 +1,7 @@
 # ReplicaSet
 
+![alt text](../img/ReplicaSet.png)
+
 - Before ReplicationController was used, now ReplicaSet is used
 - Ensures that the specified number of pod replicas are running.
   - Create and delete pods as needed.
@@ -20,7 +22,7 @@
      replicas: 5
      selector:
        matchLabels:
-         app: myapp
+         app: nginx
      template:
        metadata:
          labels:
