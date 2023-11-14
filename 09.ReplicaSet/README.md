@@ -19,7 +19,7 @@
     metadata:
      name: myapp-rs
     spec:
-     replicas: 5
+     replicas: 3
      selector:
        matchLabels:
          app: nginx
