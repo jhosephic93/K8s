@@ -19,8 +19,7 @@
     spec:
      containers:
      - name: pod-cpu-demo-ctr
-       #image: vish/stress
-       image: michaeltinga/ubuntu22.04-stress:v1
+       image: vish/stress
        args:
          - --cpu
          - "2"
