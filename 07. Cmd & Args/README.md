@@ -48,11 +48,11 @@
 ### DOCKER ENTRYPOINT
 
 ```console
-$ mkdir image-entrypoint && cd image-entrypoint
-$ docker run composer:latest --version 
-$ docker history composer:latest 
-$ docker run -ti --entrypoint=/bin/sh composer:latest #Ingresamos al container mediante bash
-# exit
+mkdir image-entrypoint && cd image-entrypoint
+docker run composer:latest --version 
+docker history composer:latest 
+docker run -ti --entrypoint=/bin/sh composer:latest #Ingresamos al container mediante bash
+exit
 ```
 
 ### WITH KUBERNETES
@@ -79,18 +79,18 @@ kubectl apply -f pod-cmd-default.yaml
 kubectl get pods
 ```
 
-- En la columna RESTARTS debe decir 5 -> Dira CrashLoopBackOff porque Kubernetes a diferencia de Docker no acepta entrypoint, dado que es composer:latest su entrypoint es composer por ende se ejecutará ese comando pero al no ser un comando que se mantiene/perene entonces el container se reiniciara.
+- In the RESTARTS column it should say 5 -> It will say CrashLoopBackOff because Kubernetes, unlike Docker, does not accept entrypoint, since it is composer:latest, its entrypoint is composer, therefore that command will be executed but since it is not a command that is maintained/perennial then the container will restart.
 
-1. Describir y obtener logs del pod:
+1. Describe and obtain pod logs:
 
     ```console
     kubectl describe pod/pod-cmd-default
-    kubectl logs -f pod-cmd-default #Los logs sera el output de "composer"
+    kubectl logs -f pod-cmd-default #The logs will be the output of "composer"
     ```
 
-## AGREGANDO CMD
+## ADDING CMD
 
-1. Archivo pod-cmd-propio.yaml con contenido:
+1. Create file pod-cmd-propio.yaml with content:
 
     ```console
     nano pod-cmd-propio.yaml
@@ -119,11 +119,11 @@ kubectl get pods
     kubectl describe pod pod-cmd-propio
     ```
 
-    - Resumen: Kubernetes NO acepta Entrypoints de Docker Images
+    - Summary: Kubernetes does NOT accept Entrypoints from Docker Images
 
-## FORMA CORRECTA DE INVOCAR COMANDS Y ARGS
+## CORRECT WAY TO INVOKE COMANDS AND ARGS
 
-1. Crear archivo pod-cmd-args.yaml con contenido:
+1. Create file pod-cmd-args.yaml
 
     ```console
     nano pod-cmd-args.yaml
@@ -146,11 +146,11 @@ kubectl get pods
 
     ```console
     kubectl apply -f pod-cmd-args.yaml
-    kubectl get pods #Aparecera en STATUS Completed porque se ejecuto "composer --version" y    al no ser un comando que se mantiene/perene el container se elimina.
+    kubectl get pods #It will appear in STATUS Completed because "composer --version" was executed and since it is not a command that is maintained/perennial, the container is deleted.
     kubectl logs -f pod-composer
     ```
 
-2. Eliminar todos los pods:
+2. Delete all pods:
 
     ```console
     kubectl delete pods --all
