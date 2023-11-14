@@ -1,8 +1,8 @@
 # DEPLOYMENTS
 
-<img src="https://matthewpalmer.net/kubernetes-app-developer/articles/deployment-diagram-kubernetes.gif" alt="alt text" width="700"/>
+![alt text](https://matthewpalmer.net/kubernetes-app-developer/articles/deployment-diagram-kubernetes.gif)
 
-<img src="../img/Deployments-Rolling-Update.webp" alt="alt text" width="700"/>
+![alt text](../img/Deployments-Rolling-Update.webp)
 
 - Does what ReplicaSet does + Manages updates.
 - Describes a desired state.
