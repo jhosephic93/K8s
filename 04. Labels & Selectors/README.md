@@ -1,5 +1,7 @@
 # LABELS
 
+![alt text](../img/Labels&Selectors.webp)
+
 1. Create file pod_labels.yaml
 
     ```console
