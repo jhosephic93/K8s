@@ -49,7 +49,7 @@
 
     ```console
     kubectl delete pods --all
-    kubectl get pods #Verificar que haya generado 3 nuevos pod
+    kubectl get pods #Verify that you have generated 3 new pods
     ```
 
 4. Delete replicationcontroller

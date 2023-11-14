@@ -1,61 +1,65 @@
 # ReplicaSet
 
-- Antes se usaba ReplicationController ahora se usa ReplicaSet
-- Garantiza que se está ejecutando el número especificado de réplicas de pod.
-  - Crea y elimina pods segun sea necesario.
-- Selector + Pod template + Replica count (numero de replicas).
+- Before ReplicationController was used, now ReplicaSet is used
+- Ensures that the specified number of pod replicas are running.
+  - Create and delete pods as needed.
+- Selector + Pod template + Replica count (number of replicas).
 
-1. Crear archivo replicaset.yaml
+1. Create file replicaset.yaml
 
-```console
-$ nano replicaset.yaml
-```
+    ```console
+    nano replicaset.yaml
+    ```
 
-```yaml
-kind: ReplicaSet
-apiVersion: apps/v1
-metadata:
- name: myapp-rs
-spec:
- replicas: 5
- selector:
-   matchLabels:
-     app: myapp
- template:
-   metadata:
-     labels:
-       app: myapp
-   spec:
-     containers:
-     - name: myapp-container
-       image: alpine
-       command: ['sh', '-c', 'echo Hello Aulautil! && sleep 3600']
-```
+    ```yaml
+    kind: ReplicaSet
+    apiVersion: apps/v1
+    metadata:
+     name: myapp-rs
+    spec:
+     replicas: 5
+     selector:
+       matchLabels:
+         app: myapp
+     template:
+       metadata:
+         labels:
+           app: myapp
+       spec:
+         containers:
+         - name: myapp-container
+           image: alpine
+           command: ['sh', '-c', 'echo Hello Aulautil! && sleep 3600']
+    ```
 
-2. Ejecutar
+2. Execute
 
-```console
-$ kubectl apply -f replicaset.yaml
-$ kubectl get replicaset
-$ kubectl describe replicaset myapp-rs
-$ kubectl get pods
-```
+    ```console
+    kubectl apply -f replicaset.yaml
+    kubectl get replicaset
+    kubectl describe replicaset myapp-rs
+    kubectl get pods
+    ```
 
-3. Probar que se genere un nuevo pod si se elimina alguno:
+3. Test that a new pod is generated if one is deleted:
 
-```console
-$ kubectl delete pods <pod_id>
-```
+    ```console
+    kubectl delete pods <pod_id>
+    ```
 
-## Scale:
+## Scale
 
-```console
-$ kubectl scale rs myapp-rs --replicas=2
-$ kubectl get pods
-```
+1. Scale
 
-## Eliminar:
+    ```console
+    kubectl scale rs myapp-rs --replicas=2
+    kubectl get pods
+    ```
 
-```console
-$ kubectl delete rs myapp-rs
-```
+## Delete rs
+
+1. Delete rs
+
+    ```console
+    kubectl delete rs myapp-rs
+    ```
