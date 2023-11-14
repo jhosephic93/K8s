@@ -1,73 +1,76 @@
-# REPLICATION CONTROLLER:
+# REPLICATION CONTROLLER
 
-- Se encarga de desplegar y mantener el numero de replicas.
-- Antes se usaba ReplicationController ahora se usa ReplicaSet.
+- It is responsible for deploying and maintaining the number of replicas.
+- Before ReplicationController was used, now ReplicaSet is used.
 - Reasons:
-  - Redundancy: Para tener alta disponibilidad.
-  - Scale: Escalar pods.
-  - Sharding: Repartir el procesamiento de computo en diferentes unidades o instancias.
+  - Redundancy: To have high availability.
+  - Scale: Scale pods.
+  - Sharding: Distribute the computing processing in different units or instances.
 
+1. Create file replicationcontroller.yaml
 
-1. Crear archivo replicationcontroller.yaml con contenido:
+    ```console
+    nano replicationcontroller.yaml
+    ```
 
-```console
-$ nano replicationcontroller.yaml
-```
-
-```yaml
-kind: ReplicationController
-apiVersion: v1
-metadata:
- name: myapp-rp
-spec:
- replicas: 3
- selector:
-   app: myapp
- template:
-   metadata:
-     name: myapp
-     labels:
+    ```yaml
+    kind: ReplicationController
+    apiVersion: v1
+    metadata:
+     name: myapp-rp
+    spec:
+     replicas: 3
+     selector:
        app: myapp
-   spec:
-     containers:
-     - name: myapp
-       image: nginx:alpine
-       resources:
-         limits:
-           cpu: 0.5
-```
+     template:
+       metadata:
+         name: myapp
+         labels:
+           app: myapp
+       spec:
+         containers:
+         - name: myapp
+           image: nginx:alpine
+           resources:
+             limits:
+               cpu: 0.5
+    ```
 
-2. Ejecutar
+2. Execute
 
-```
-$ kubectl apply -f replicationcontroller.yaml
-$ kubectl get replicationcontroller
-$ kubectl get rc
-$ kubectl get pods
-```
+    ```bash
+    kubectl apply -f replicationcontroller.yaml
+    kubectl get replicationcontroller
+    kubectl get rc
+    kubectl get pods
+    ```
 
-3. Eliminar todos los pods:
+3. Delete all pods:
 
-```console
-$ kubectl delete pods --all
-$ kubectl get pods #Verificar que haya generado 3 nuevos pod
-```
+    ```console
+    kubectl delete pods --all
+    kubectl get pods #Verificar que haya generado 3 nuevos pod
+    ```
 
-4. Eliminar replicationcontroller
+4. Delete replicationcontroller
 
-```console
-$ kubectl delete rc myapp-rp
-```
+    ```console
+    kubectl delete rc myapp-rp
+    ```
 
-## Scaling:
+## Scaling
 
-```console
-$ kubectl scale rc myapp-rp --replicas=6
-$ kubectl get pods
-```
+1. Scale pod
 
-## Eliminar:
+    ```console
+    kubectl scale rc myapp-rp --replicas=6
+    kubectl get pods
+    ```
 
-```console
-$ kubectl delete rc myapp-rp
-```
+## Delete
+
+1. Delete rc
+
+    ```console
+    kubectl delete rc myapp-rp
+    ```
