@@ -344,9 +344,9 @@
     kubectl describe cm myconfigdata
     ```
 
-### Pod usando ConfigMap as file
+### Pod using ConfigMap as file
 
-1. Crear archivo pod_cm_file.yaml con contenido:
+1. Create file pod_cm_file.yaml:
 
     ```console
     nano pod_cm_file.yaml
@@ -371,17 +371,17 @@
     ```
 
     ```console
-    $ kubectl apply -f pod_cm_file.yaml
-    $ kubectl get pods
-    $ kubectl exec -ti nginx-pod-cm-file sh
-    # ls /mnt/files/
-    # cat /mnt/files/myfile.txt
-    # exit
+    kubectl apply -f pod_cm_file.yaml
+    kubectl get pods
+    kubectl exec -ti nginx-pod-cm-file sh
+    ls /mnt/files/
+    cat /mnt/files/myfile.txt
+    exit
     ```
 
-### Opcional
+### Optional
 
-1. misma implementacion, pero como Deployment deploy_cm.yaml
+1. Same implementation, but with Deployment deploy_cm.yaml
 
     ```console
     nano deploy_cm.yaml
@@ -422,13 +422,13 @@
     kubectl exec -ti nginx-dep-788c7849c7-7h47k -- ls /mnt/files/
     ```
 
-### Cuando los configmaps son actualizados, los pods no se actualizan automaticamente     para ello se puede usar reloader -> [https://github.com/mario21ic/k8s-demos/tree/master/]   reloader
+### When the configmaps are updated, the pods are not updated automatically, for this you can use reloader -> [https://github.com/mario21ic/k8s-demos/tree/master/] reloader
 
 **************************************
 
 ## K8s Secrets
 
-1. Crear archivo secret1.yaml
+1. Create file secret1.yaml
 
     ```console
     nano secret1.yaml
@@ -452,9 +452,9 @@
     kubectl describe secret my-secret
      ```
 
-### Pod que consuma el secret
+### Pod using the secret
 
-1. Archivo pod_secret.yaml
+1. Create file pod_secret.yaml
 
     ```console
     nano pod_secret.yaml
@@ -483,9 +483,9 @@
     kubectl exec -ti nginx-pod-secret -- env
     ```
 
-2. Dinamica: Recuperar los otros dos valores (key y token).
+2. Dynamic: Recover the other two values (key and token).
 
-3. Limpiar cluster:
+3. Clean cluster:
 
     ```console
     kubectl delete all --all
