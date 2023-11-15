@@ -50,7 +50,7 @@
     kubectl get deploy,pods
     ```
 
-2. Crear archivo nginx_svc.yaml
+2. Create file nginx_svc.yaml
 
     ```console
     nano nginx_svc.yaml
@@ -69,15 +69,15 @@
         - port: 80
     ```
 
-3. Crear y verificar:
+3. Create and check:
 
     ```console
     kubectl apply -f nginx_svc.yaml
     kubectl get svc
-    kubectl describe service nginx-cl-svc #Revisar la parte de Endpoints e IP
+    kubectl describe service nginx-cl-svc #Review the Endpoints and IP
     ```
 
-4. **Service Discovery**: Entrar a un pod e instalar curl para apuntar al service:
+4. **Service Discovery**: Enter a pod and install curl to point to the service:
 
     ```console
     kubectl get svc
@@ -88,7 +88,7 @@
     exit
     ```
 
-5. En otro(s) terminal hacer logs por cada pod(s):
+5. In another terminal(s) make logs for each pod(s):
 
     ```console
     kubectl get pods
@@ -99,7 +99,7 @@
 
 ## K8s Services | NodePort
 
-1. Crear archivo service.np.yaml
+1. Create file service.np.yaml
 
     ```console
     nano service.np.yaml
@@ -121,7 +121,7 @@
          targetPort: 80 # pod-container
     ```
 
-2. Aplicar y revisar el tipo y port:
+2. Apply and review the type and port:
 
     ```console
     kubectl apply -f service.np.yaml
@@ -129,7 +129,7 @@
     kubectl describe svc nginx-np-svc
     ```
 
-3. Encontrar Ip y aplicar curl:
+3. Find IP and apply curl:
 
     ```console
     kubectl describe node | grep IP && minikube ip
@@ -137,7 +137,7 @@
     curl -I 192.168.49.2:32002
     ```
 
-4. Opcional con minikube:
+4. Optional with minikube:
 
     ```console
     curl -I $(minikube ip):32002
@@ -145,7 +145,7 @@
     curl -I $(minikube service nginx-np-svc --url)
     ```
 
-5. Verificar el Service port interno del Nodeport:
+5. Verify the internal Service port of the Nodeport:
 
     ```console
     kubectl run mysh -ti --rm --image=alpine:latest --restart=Never -- sh
@@ -155,7 +155,7 @@
     exit
     ```
 
-6. Crear archivo service.np2.yaml con contenido:
+6. Create  file service.np2.yaml
 
     ```console
     nano service.np2.yaml
@@ -177,14 +177,14 @@
          targetPort: 80 # pod-container
     ```
 
-7. Aplicar y verificar:
+7. Apply and check:
 
     ```console
     kubectl apply -f service.np2.yaml # Debe salir error de port en uso.
     ```
 
-8. Para solucionar esto, editar nuevamente el archivo eliminando la linea:
-nodePort: 32002 # node | Y aplicar de nuevo:
+8. To solve this, edit the file again deleting the line:
+nodePort: 32002 # node | And apply again:
 
     ```console
     kubectl apply -f service.np2.yaml
@@ -196,7 +196,7 @@ nodePort: 32002 # node | Y aplicar de nuevo:
 
 ## K8s Services | Load Balancer
 
-1. Crear archivo service.lb.yaml
+1. Create file service.lb.yaml
 
     ```console
     nano service.lb.yaml
@@ -218,14 +218,14 @@ nodePort: 32002 # node | Y aplicar de nuevo:
          targetPort: 80 # container
     ```
 
-2. Ejecutar
+2. Execute
 
     ```console
     kubectl apply -f service.lb.yaml
-    kubectl get svc # Vemos que el service esta en estado “pending” en la columna     “external-ip”.
+    kubectl get svc #We see that the service is in “pending” status in the “external-ip” column.
     ```
 
-3. Haremos una simulacion con minikube para dar una ip.
+3. We will do a simulation with minikube to give an IP.
 
     ```console
     $ minikube tunnel
@@ -236,7 +236,7 @@ nodePort: 32002 # node | Y aplicar de nuevo:
 
 ## K8s Services | External Name
 
-1. Crear archivo service.external.yaml
+1. Create file service.external.yaml
 
     ```console
     nano service.external.yaml
@@ -252,14 +252,14 @@ nodePort: 32002 # node | Y aplicar de nuevo:
       externalName: app.deliverygo.app
     ```
 
-2. Ejecutar
+2. Execute
 
     ```console
     kubectl apply -f service.external.yaml
     kubectl get svc
     ```
 
-3. Verificar que este resolviendo:
+3. Verify that it is resolving:
 
     ```console
     kubectl run mysh -ti --rm --image=alpine:latest --restart=Never -- sh
@@ -271,7 +271,7 @@ nodePort: 32002 # node | Y aplicar de nuevo:
 
 ### Services with Static Ip
 
-1. Crear archivo service.static.yaml
+1. Create file service.static.yaml
 
     ```console
     nano service.static.yaml
@@ -299,10 +299,10 @@ nodePort: 32002 # node | Y aplicar de nuevo:
 
     ```console
     kubectl apply -f service.static.yaml
-    kubectl describe svc external-ip-database # Fijarse en los endpoints
+    kubectl describe svc external-ip-database #Look at endpoints
     ```
 
-2. Limpiar todo:
+2. Clean all:
 
     ```console
     kubectl delete all --all
