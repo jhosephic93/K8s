@@ -13,6 +13,8 @@
 - **LoadBalancer**: Uses cloud provider’s load balancer to expose the service.
 - **ExternalName**: maps the service to a DNS name
 
+![alt text](../img/Services.gif)
+
 ## K8s Services | ClusterIP
 
 1. Create file deploy.yaml:
