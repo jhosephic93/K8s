@@ -95,7 +95,7 @@
 
 ### Pod que use el Claim
 
-1. Crear un pod_pv_pvc.yaml con contenido:
+1. Create file pod_pv_pvc.yaml:
 
     ```console
     vim pod_pv_pvc.yaml
@@ -122,7 +122,7 @@
             name: mi-volume
     ```
 
-2. Crear y verificar:
+2. Create and check:
 
     ```console
     kubectl apply -f pod_pv_pvc.yaml
@@ -133,7 +133,7 @@
     exit
     ```
 
-3. Eliminar pod y probar persistencia:
+3. Delete pod and test persistence:
 
     ```console
     kubectl delete -f pod_pv_pvc.yaml
@@ -143,7 +143,7 @@
     exit
     ```
 
-4. Verificar el hostPath en el K8s cluster:
+4. Verify the hostPath on the K8s cluster:
 
     ```console
     minikube ssh
@@ -156,7 +156,7 @@
 
 ## Volumen emptyDir
 
-1. Crear archivo pod_emptydir.yaml con contenido:
+1. Create file pod_emptydir.yaml
 
     ```console
     nano pod_emptydir.yaml
@@ -182,7 +182,7 @@
             name: scratch-volume
     ```
 
-2. Crear y verificar:
+2. Create and check:
 
     ```console
     kubectl apply -f pod_emptydir.yaml
@@ -192,9 +192,9 @@
     exit
     ```
 
-### Dato al ser emptydir un volume al vuelo no tiene lugar, se guarda en memoria
+### Fact: since a volume is emptydir on the fly it has no place, it is saved in memory
 
-1. Eliminar Pod y probar persistencia:
+1. Delete Pod and test persistence:
 
     ```console
     kubectl delete -f pod_emptydir.yaml
@@ -218,10 +218,10 @@
     kubectl describe configmap aws-auth -n kube-system
     ```
 
-1. Crear archivo configmap1.yaml con contenido:
+1. Create file configmap1.yaml:
 
     ```console
-    nano configmap1.yaml
+    vim configmap1.yaml
     ```
 
     ```yaml
@@ -242,9 +242,9 @@
     kubectl describe configmap nginx-cm
     ```
 
-### Pod usando ConfigMap
+### Pod using ConfigMap
 
-1. Crear archivo pod_cm.yaml con contenido:
+1. Create file pod_cm.yaml:
 
     ```console
     nano pod_cm.yaml
@@ -274,7 +274,7 @@
                key: special.how
     ```
 
-2. Ejecutar
+2. Execute
 
     ```console
     kubectl apply -f pod_cm.yaml 
@@ -286,7 +286,7 @@
     exit
      ```
 
-3. Crear archivo pod_cm_all.yaml con contenido:
+3. Create file pod_cm_all.yaml
 
     ```console
     nano pod_cm_all.yaml
@@ -321,7 +321,7 @@
 1. Create file configmap2.yaml
 
     ```console
-    nano configmap2.yaml
+    vim configmap2.yaml
     ```
 
     ```yaml
