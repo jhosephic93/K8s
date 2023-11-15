@@ -23,11 +23,11 @@
     ```
 
     ```console
-    $ kubectl apply -f pod_env.yaml
-    $ kubectl get pods
-    $ kubectl exec -ti nginx-env sh
-    # echo $MY_KEY
-    # echo $foo
-    # env
-    # exit
+    kubectl apply -f pod_env.yaml
+    kubectl get pods
+    kubectl exec -ti nginx-env sh
+    echo $MY_KEY
+    echo $foo
+    env
+    exit
     ```
