@@ -495,12 +495,12 @@
 
 ## K8s | Volume NFS
 
-### Pre-requisitos
+### Pre-requisites
 
-- Tener un Server NFS.
-  - IP de Server NFS y directorio.
+- Have an NFS Server.
+  - NFS Server IP and directory.
 
-1. Crear archivo pod-nfs.yaml
+1. Create file pod-nfs.yaml
 
     ```console
     nano pod-nfs.yaml
@@ -536,7 +536,7 @@
 
           # Write to a file inside our NFS
           command: ["/bin/sh"]
-          args: ["-c", "while true; do date >> /var/nfs/dates.txt; sleep 5; done"]   
+          args: ["-c", "while true; do date >> /var/nfs/dates.txt; sleep 5; done"]
     ```
 
 ### PLUS | Crear un Server NFS con K8s
