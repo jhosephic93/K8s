@@ -93,7 +93,7 @@
     kubectl describe persistentvolumeclaim/myclaim
     ```
 
-### Pod que use el Claim
+### Pod using the Claim
 
 1. Create file pod_pv_pvc.yaml:
 
