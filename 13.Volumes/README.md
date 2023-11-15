@@ -87,7 +87,7 @@
 2. Create and check:
 
     ```console
-    kubectl apply -f pv.yaml 
+    kubectl apply -f pvc.yaml 
     kubectl get persistentvolumeclaim
     kubectl get pvc
     kubectl describe persistentvolumeclaim/myclaim
