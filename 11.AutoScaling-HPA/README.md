@@ -39,7 +39,11 @@
     kubectl get service -n itsmetommy
     ```
 
-5. Crear HPA | Replace with the following content
+5. Create HPA | Replace with the following content
+
+    ```console
+    vim hpa.yaml
+    ```
 
     ```yaml
     apiVersion: autoscaling/v2
@@ -101,7 +105,7 @@
 
 10. Generate traffic and Monitor
 
-## Abrir 4 terminales mas con ctrl+shift+t
+## Open 4 more terminals with ctrl+shift+t
 
 1. In terminal n1 to see status:
 
