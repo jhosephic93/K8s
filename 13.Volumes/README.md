@@ -539,9 +539,9 @@
           args: ["-c", "while true; do date >> /var/nfs/dates.txt; sleep 5; done"]
     ```
 
-### PLUS | Crear un Server NFS con K8s
+### PLUS | Create an NFS Server with K8s
 
-1. Crear archivo nfs-server.yaml
+1. Create file nfs-server.yaml
 
     ```console
     nano nfs-server.yaml
