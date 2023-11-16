@@ -2,14 +2,14 @@
 
 ![Ingress](./img/ingress.png)
 
-1. Activar addons de ingress
+1. Activate addons of ingress
 
     ```console
     minikube addons enable ingress
     minikube addons list | grep ingress
     ```
 
-2. Crear archivo web1.yaml
+2. Create file web1.yaml
 
     ```console
     nano web1.yaml
@@ -51,14 +51,14 @@
           targetPort: 80
     ```
 
-3. Ejecutar y listar
+3. Execute
 
     ```console
     kubectl apply -f web1.yaml
     kubectl get pod,deploy,svc
     ```
 
-4. Crear archivo web2.yaml
+4. Create file web2.yaml
 
     ```console
     nano web2.yaml
@@ -100,14 +100,14 @@
          targetPort: 80
     ```
 
-5. Ejecutar y listar
+5. Execute
 
     ```console
     kubectl apply -f web2.yaml
     kubectl get pod,deploy,svc
     ```
 
-6. Probar los NodePorts:
+6. Test NodePorts:
 
     ```console
     kubectl get svc
@@ -115,7 +115,7 @@
     curl $(minikube ip):31512 # Debe salir la v2
     ```
 
-7. Crear archivo ingress.yaml
+7. Create file ingress.yaml
 
     ```console
     nano ingress.yaml
@@ -149,28 +149,28 @@
                   number: 8080
     ```
 
-8. Ejecutar y listar:
+8. Execute:
 
     ```console
     kubectl apply -f ingress.yaml
     kubectl get ingress
     ```
 
-9. Probando ingress:
+9. Tests ingress:
 
     ```console
     curl -H "Host: hello-world.info" $(minikube ip)
     curl -H "Host: hello-world.info" $(minikube ip)/v2
     ```
 
-10. Simulando Domain hello-world.info
+10. Simulating Domain hello-world.info
 
     ```console
     minikube ip
     sudo vim /etc/hosts
     ```
 
-11. Agregamos al final la ip del minikube:
+11. We add the minikube IP at the end:
 
     ```vim
     192.168.49.2 hello-world.info
@@ -183,7 +183,7 @@
     curl hello-world.info/v2/xD
     ```
 
-12. Limpiar todo:
+12. Delete all:
 
     ```console
     kubectl delete all --all
