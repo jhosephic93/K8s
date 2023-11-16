@@ -254,6 +254,10 @@ nodePort: 32002 # node | And apply again:
 
 ## K8s Services | External Name
 
+- An **ExternalName** service in Kubernetes maps a cluster service to an external DNS, acting as a DNS alias without providing IPs or load balancing. It is ideal for connecting internal cluster services with external resources, simplifying internal-external communication.
+
+![alt text](../img/4TypesServices.gif)
+
 1. Create file service.external.yaml
 
     ```console
