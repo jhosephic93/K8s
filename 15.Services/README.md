@@ -109,6 +109,10 @@
 
 ## K8s Services | NodePort
 
+- **NODEPORT** in Kubernetes exposes your application outside of the cluster by assigning a specific port (in this case, 32002) on all nodes. Traffic sent to this port on any node is redirected to port 80 of your nginx container.
+
+![alt text](../img/NodePort.svg)
+
 1. Create file service.np.yaml
 
     ```console
