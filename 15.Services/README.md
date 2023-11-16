@@ -13,9 +13,11 @@
 - **LoadBalancer**: Uses cloud provider’s load balancer to expose the service.
 - **ExternalName**: maps the service to a DNS name
 
-![alt text](../img/Services.gif)
-
 ## K8s Services | ClusterIP
+
+- **CLUSTERIP** SERVICES IN KUBERNETES ONLY ALLOW INTERNAL COMMUNICATION AND ARE NOT ACCESSIBLE FROM OUTSIDE THE CLUSTER.
+
+![alt text](../img/ClusterIP.png)
 
 1. Create file deploy.yaml:
 
@@ -79,7 +81,13 @@
     kubectl describe service nginx-cl-svc #Review the Endpoints and IP
     ```
 
-4. **Service Discovery**: Enter a pod and install curl to point to the service:
+4. Validate:
+
+    ```bash
+    kubectl run -i --tty --rm debug --image=busybox --restart=Never -- wget -O- http://nginx-cl-svc:80
+    ```
+
+5. **Service Discovery**: Enter a pod and install curl to point to the service:
 
     ```console
     kubectl get svc
@@ -90,7 +98,7 @@
     exit
     ```
 
-5. In another terminal(s) make logs for each pod(s):
+6. In another terminal(s) make logs for each pod(s):
 
     ```console
     kubectl get pods
