@@ -109,7 +109,7 @@
 
 ## K8s Services | NodePort
 
-- **NODEPORT** in Kubernetes exposes your application outside of the cluster by assigning a specific port (in this case, 32002) on all nodes. Traffic sent to this port on any node is redirected to port 80 of your nginx container.
+- **NODEPORT** in Kubernetes exposes your application outside of the cluster by assigning a specific port (in this case, 32002) on all nodes. Traffic sent to this port on any node is redirected to port 80 of your pod nginx.
 
 ![alt text](../img/NodePort.svg)
 
@@ -210,6 +210,10 @@ nodePort: 32002 # node | And apply again:
 
 ## K8s Services | Load Balancer
 
+-s
+
+![alt text](../img/LoadBalancer.gif)
+
 1. Create file service.lb.yaml
 
     ```console
@@ -242,10 +246,10 @@ nodePort: 32002 # node | And apply again:
 3. We will do a simulation with minikube to give an IP.
 
     ```console
-    $ minikube tunnel
+    minikube tunnel
     ## En otro terminal:
-    $ kubectl get svc
-    $ curl <external_ip>:8080
+    kubectl get svc
+    curl <external_ip>:8080
     ```
 
 ## K8s Services | External Name
