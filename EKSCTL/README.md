@@ -16,7 +16,7 @@
     aws ec2 describe-instances
     ```
 
-## Instalar eksctl
+## Install eksctl
 
 ```console
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/   download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
@@ -25,7 +25,7 @@ sudo chmod +x /usr/local/bin/eksctl
 eksctl version
 ```
 
-## Crear o actualizar kubeconfig
+## Create or update kubeconfig
 
 ```console
 rm ~/.kube/config
@@ -34,7 +34,7 @@ kubectl get pods --kubeconfig ./.kube/config
 kubectl get svc
 ```
 
-## Ejemplo de crear archivo cluster.yaml
+## Example of creating cluster.yaml file
 
 ```console
 nano cluster.yaml
@@ -57,7 +57,7 @@ nodeGroups:
 eksctl create cluster -f cluster.yaml
 ```
 
-1. Probar conexion y despliegue
+1. Test connection and deployment
 
   ```console
   kubectl get nodes
