@@ -96,7 +96,6 @@
     ```
 
     ```yaml
-    nano service_namespace.yaml
     kind: Service
     apiVersion: v1
     metadata:
@@ -112,7 +111,7 @@
     kubectl apply -f service_namespace.yaml -n red-team
     kubectl exec -ti nginx-pod -n green-team -- sh
     ping nginx-svc #Debe salir error porque el service es del red-team namespace
-    kubectl exec -ti nginx-pod -n red-team – sh
+    kubectl exec -ti nginx-pod -n red-team -- sh
     ping nginx-svc #Debe funcionar porque el service esta en el red-team namespace
     ```
 
@@ -122,5 +121,5 @@
     kubectl get pods -n red-team
     kubectl get pods -n green-team
     kubectl get svc -n red-team
-    $ kubectl get svc -n green-team
+    kubectl get svc -n green-team
     ```
