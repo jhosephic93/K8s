@@ -44,6 +44,10 @@
 
 5. Specficly namespace: Create file pod_namespace1.yaml
 
+    ```bash
+    nano pod_namespace1.yaml
+    ```
+
     ```yaml
     kind: Pod
     apiVersion: v1
