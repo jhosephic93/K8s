@@ -8,6 +8,8 @@
   - Bare Pods
   - Static Pods
 
+![DaemonSets](../img/Daemonsets.png)
+
 1. Create file nginx-daemonset.yaml
 
     ```console
