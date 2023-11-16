@@ -1,5 +1,7 @@
 # Service Account
 
+![Statefulsets](../img/Services-Account.png)
+
 - When a process running inside a container needs to make a request to Kubernetes’ API Server, a Service Account is used.
 - These objects are defined by per namespace.
 - Every pod in your k8s cluster has a Service Account it uses. Most of time, this is set to “default”.
@@ -190,7 +192,7 @@
     ```console
     TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
     curl -H "Authorization: Bearer $TOKEN" https://kubernetes/api/v1/ --insecure
-    curl -H "Authorization: Bearer $TOKEN" https://kubernetes/api/v1/namespaces/default/    pods/ --insecure #En ambos casos debe funcionar sin problemas y listar correctamente.
+    curl -H "Authorization: Bearer $TOKEN" https://kubernetes/api/v1/namespaces/default/pods/ --insecure #En ambos casos debe funcionar sin problemas y listar correctamente.
     ```
 
 9. Trying to list services:
