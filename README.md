@@ -55,24 +55,24 @@ $ kubectl cluster-info dump
 
 1. List NODES.
 
-  ```bash
-  kubectl get nodes
-  ```
+   ```bash
+   kubectl get nodes
+   ```
 
 2. Listar todos los recursos:
 
-  ```console
-  kubectl get all -A
-  ```
+   ```console
+   kubectl get all -A
+   ```
 
 3. Listar todos nodos y pods:
 
-  ```console
-  kubectl get all
-  ```
+   ```console
+   kubectl get all
+   ```
 
 4. Muestra detalles de un grupo de recursos.
 
-  ```console
-  kubectl describe nodes
-  ```
+   ```console
+   kubectl describe nodes
+   ```
