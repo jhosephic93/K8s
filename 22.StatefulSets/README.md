@@ -8,6 +8,10 @@
 
 ![Statefulsets](./img/statefulsets.jpg)
 
+![Statefulsets](../img/stateful-01.png)
+
+![Statefulsets02](../img/stateful-02.jpg)
+
 ## Stateful vs Stateless
 
 - Stateless app:
