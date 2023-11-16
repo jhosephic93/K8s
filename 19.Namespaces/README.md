@@ -33,13 +33,18 @@
     apiVersion: v1
     metadata:
       name: green-team
+    ```
 
-    Aplicar y listar:
-    $ kubectl apply -f my-namespaces.yaml
-    $ kubectl get namespaces
+4. Apply and list
 
-    Especificando namespace:
-    Crear archivo pod_namespace1.yaml
+    ```bash
+    kubectl apply -f my-namespaces.yaml
+    kubectl get namespaces
+    ```
+
+5. Specficly namespace: Create file pod_namespace1.yaml
+
+    ```yaml
     kind: Pod
     apiVersion: v1
     metadata:
@@ -73,11 +78,21 @@
       containers:
       - name: nginx
         image: nginx:alpine
-    $ kubectl apply -f pod_namespace2.yaml -n green-team
-    $ kubectl get pods -n green-team
+    ```
 
-    Probar recursos aislados:
-    Crear archivo service_namespace.yaml
+    ```bash
+    kubectl apply -f pod_namespace2.yaml -n green-team
+    kubectl get pods -n green-team
+    ```
+
+2. Create file service_namespace.yaml:
+
+    ```bash
+    nano service_namespace.yaml
+    ```
+
+    ```yaml
+    nano service_namespace.yaml
     kind: Service
     apiVersion: v1
     metadata:
@@ -87,7 +102,7 @@
      - port: 80
      ```
 
-2. Execute
+3. Execute
 
      ```console
     kubectl apply -f service_namespace.yaml -n red-team
@@ -97,7 +112,7 @@
     ping nginx-svc #Debe funcionar porque el service esta en el red-team namespace
     ```
 
-3. List resources:
+4. List resources:
 
     ```console
     kubectl get pods -n red-team
