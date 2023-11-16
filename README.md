@@ -1,6 +1,6 @@
 # KUBERNETES | K8s
 
-## Dato
+## Tip
 
 - Kubectl funciona con Minikube/EKSCTL/K3s
 
@@ -9,70 +9,70 @@
 ### Version 1.20
 
 ```console
-$ wget https://dl.k8s.io/release/v1.20.0/bin/linux/amd64/kubectl
+wget https://dl.k8s.io/release/v1.20.0/bin/linux/amd64/kubectl
 ```
 
-### Version mas reciente/stable | Cambiar "amd" por "arm"
+### Most recent/stable version | Change "amd" by "arm"
 
 ```console
-$ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 ```
 
-### En cualquiera de ambos casos.
+### In either case
 
 ```console
-$ chmod +x kubectl
-$ sudo mv kubectl /usr/local/bin/
-$ kubectl version --client
-$ kubectl version --output=yaml
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+kubectl version --client
+kubectl version --output=yaml
 ```
 
-Link -> https://github.com/kubernetes/kubernetes/releases
+Link -> <https://github.com/kubernetes/kubernetes/releases>
 
-## Ver que API-RESOURCES SOPORTA K8s Cluster.
+## See which API-RESOURCES SUPPORTS K8s Cluster
 
 ```console
-$ kubectl api-resources
+kubectl api-resources
 ```
 
-## Revisar Status de K8s Cluster (Minkube/K3s/EKSCTL)
+## Check Status of K8s Cluster (Minkube/K3s/EKSCTL)
 
 ```bash
 # Cuando usamos minikube este script es opcional / Revisar si podemos hacerlo con AWS
 $ kubectl get componentstatuses
 ```
 
-## Info Total de K8s
+## Total K8s Info
 
 ```bash
 $ kubectl cluster-info
-	# kuebernetes control plane = donde master se esta corriendo
-	# CoreDNS = docker (ping web)
+# kuebernetes control plane = donde master se esta corriendo
+# CoreDNS = docker (ping web)
 $ kubectl cluster-info dump
 ```
 
-## Basic Commands.
+## Basic Commands
 
-1. Listar NODOS.
+1. List NODES.
 
-```console
-$ kubectl get nodes
-```
+  ```bash
+  kubectl get nodes
+  ```
 
 2. Listar todos los recursos:
 
-```console
-$ kubectl get all -A
-```
+  ```console
+  kubectl get all -A
+  ```
 
 3. Listar todos nodos y pods:
 
-```console
-$ kubectl get all
-```
+  ```console
+  kubectl get all
+  ```
 
 4. Muestra detalles de un grupo de recursos.
 
-```console
-$ kubectl describe nodes
-```
+  ```console
+  kubectl describe nodes
+  ```
