@@ -61,7 +61,7 @@ eksctl create cluster -f cluster.yaml
 
   ```console
   kubectl get nodes
-  kubectl scale deploy nginx-dp --replicas=5 #Escalar:
-  eksctl get clusters --region=us-west-2 #Listar clusters:
-  eksctl delete cluster demo2 --region=us-west-2 #Eliminar cluster:
+  kubectl scale deploy nginx-dp --replicas=5 #Scale:
+  eksctl get clusters --region=us-west-2 #List clusters:
+  eksctl delete cluster demo2 --region=us-west-2 #Delete cluster:
   ```
