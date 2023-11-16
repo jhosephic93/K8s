@@ -54,11 +54,11 @@
 3. Test path /ready
 
     ```console
-    $ kubectl exec -ti nginx-dp-liveness-8cf79d5c7-r9rff -- sh
-    # apk add curl
-    # curl localhost/ready #An error appears because the route does not exist
-    # curl localhost/
-    # exit
+    kubectl exec -ti nginx-dp-liveness-8cf79d5c7-r9rff -- sh
+    apk add curl
+    curl localhost/ready #An error appears because the route does not exist
+    curl localhost/
+    exit
     ```
 
 ## Try with Service
@@ -103,7 +103,7 @@
 4. Execute again:
 
     ```bash
-    kubectl apply -f deploy.yaml
+    kubectl apply -f deploy_readiness_liveness.yaml
     kubectl get pods
     kubectl describe service/nginx-np-readiness-liveness
     ```
