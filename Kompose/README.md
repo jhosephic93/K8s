@@ -12,4 +12,4 @@ sudo apt install ./kompose_1.26.1_amd64.deb
 kompose convert
 ```
 
-Link -> <kompose.io>
+Link -> <https://kompose.io/>
